@@ -34,7 +34,11 @@ class HttpClientSpec extends Specification {
                     def mockServiceUrl = "http://localhost:${wm.port()}/test"
                     httpClient.get(URI.create(mockServiceUrl)) { req ->
                         req.readTimeout(Duration.ofSeconds(2))
-                    }.then {
+                    }
+                    .onError {
+                        context.response.status(500).send "Fail!"
+                    }
+                    .then {
                         context.response.status(200).send "You'll never see this"
                     }
                 }
