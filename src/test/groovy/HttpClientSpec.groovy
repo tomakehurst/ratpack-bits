@@ -19,7 +19,7 @@ class HttpClientSpec extends Specification {
     WireMockServer wm
 
     void setup() {
-        wm = new WireMockServer(wireMockConfig().port(5555))
+        wm = new WireMockServer(wireMockConfig().dynamicPort())
         wm.start()
     }
 
